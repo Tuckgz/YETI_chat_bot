@@ -1,1 +1,1 @@
-# YETI_chat_bot
+# YETI Chat Bot
