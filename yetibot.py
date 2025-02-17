@@ -94,18 +94,20 @@ try:
         previous_size = get_message_list_size()
         print(previous_size)
         counter = 0
+        cascade = 0
         prev_time = start_time
         part_time = None
-        time.sleep(1)
 
         while counter < 50:
             current_size = get_message_list_size()
             if current_size != previous_size:
                 print(current_size)
                 previous_size = current_size
-                if part_time is None and prev_time - time.time() < 0.25:
-                    print("setting part time")
-                    part_time = time.time()
+                if part_time is None and prev_time - time.time() < 0.25 and prev_time != start_time:
+                    cascade += 1
+                    if cascade > 3:
+                        print("setting part time")
+                        part_time = time.time()
                 prev_time = time.time()
             elif part_time is not None:
                 counter += 1
