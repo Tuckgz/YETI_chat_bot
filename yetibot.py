@@ -14,6 +14,11 @@ import os
 service = Service("/opt/homebrew/bin/geckodriver")  # Update with your GeckoDriver path
 driver = webdriver.Firefox(service=service)
 
+def get_message_list_size():
+    message_list_log = driver.find_element(By.ID, 'MESSAGE_LIST_LOG')
+    # print(len(message_list_log.find_elements(By.CSS_SELECTOR, '*')))
+    return len(message_list_log.find_elements(By.CSS_SELECTOR, '*'))
+
 # Load cookies from pickle file
 def load_cookies(driver, cookies_file):
     try:
@@ -44,17 +49,41 @@ try:
     driver.refresh()
     
     # Wait for the page to load
-    time.sleep(40)
+    time.sleep(5)
 
-    # Locate the Rufus button by its ID
-    yeti_button = driver.find_element(By.ID, 'ada-chat-button')    # Click the Rufus button
-    ActionChains(driver).move_to_element(yeti_button).click().perform()
-    time.sleep(5)  # Wait for the Rufus panel to open
+    # # Locate the Yeti button by its ID
+    # yeti_button = driver.find_element(By.ID, 'ada-chat-button')
+    # ActionChains(driver).move_to_element(yeti_button).click().perform()
+    # time.sleep(5)
+    iframe_button = driver.find_element(By.ID, "ada-button-frame")
+    driver.switch_to.frame(iframe_button)
 
+    # Step 2: Find and click the ada-chat-button
+    chat_button = driver.find_element(By.ID, "ada-chat-button")
+    chat_button.click()
+    driver.switch_to.default_content()
+    time.sleep(5)  # Wait for the chat window to open (adjust if necessary)
+
+    # Step 3: Switch to the iframe containing the chat input (ada-chat-frame)
+    
+    WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.TAG_NAME, "iframe")))
+
+    # Now, let's check again how many iframes are available
+    iframes = driver.find_elements(By.TAG_NAME, "iframe")
+    print(f"Found {len(iframes)} iframes.")
+
+    if len(iframes) > 0:
+        # Print all iframe src attributes (or other useful info) to debug
+        for index, iframe in enumerate(iframes):
+            print(f"Iframe {index}: {iframe.get_attribute('src')}")
+    else:
+        print("No iframes found on the page.")
+    
+    driver.switch_to.frame(iframes[5])
     # Loop through each question in the CSV
     for _, row in questions_df.iterrows():
         question = row['Question']
-
+        
         # Find the text area by its ID and send keys
         chat_input = driver.find_element(By.CSS_SELECTOR, "[data-testid='MessageInput']")
         chat_input.send_keys(question)
@@ -62,23 +91,33 @@ try:
         
         # Start timing the partial response (for the first element)
         start_time = time.time()
+        previous_size = get_message_list_size()
+        print(previous_size)
+        counter = 0
+        prev_time = start_time
+        part_time = None
+        time.sleep(1)
 
-        # Wait for the first element (partial response) to appear
-        WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, '[data-testid="MessageGroupNewBot"]'))
-        )
+        while counter < 50:
+            current_size = get_message_list_size()
+            if current_size != previous_size:
+                print(current_size)
+                previous_size = current_size
+                if part_time is None and prev_time - time.time() < 0.25:
+                    print("setting part time")
+                    part_time = time.time()
+                prev_time = time.time()
+            elif part_time is not None:
+                counter += 1
+        
+            time.sleep(0.1)
 
-        # Measure the partial response time (time for the first element to appear)
-        partial_response_time = time.time() - start_time
+        partial_response_time = part_time - start_time
+        end_time = prev_time - start_time
 
-        # Now, wait for the thumbs up image to appear (final response indicator)
-        WebDriverWait(driver, 30).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "span.line-break"))
-        )
-        end_time = time.time() - start_time
-
+        time.sleep(5)
         # Capture the full response after thumbs up appears
-        key_elements = driver.find_elements(By.CSS_SELECTOR, "div.rufus-conversation span key")
+        key_elements = driver.find_elements(By.CSS_SELECTOR, '[data-testid="MessageGroupNewBot"]')
         full_response = " ".join([key.text for key in key_elements])
 
         # Append the data to the list
@@ -90,7 +129,7 @@ try:
         })
 
         # Print the results
-        print("Rufus Response:", full_response.strip())
+        print("Yeti Response:", full_response.strip())
         print(f"Partial Response Time (first element): {partial_response_time:.2f} seconds")
         print(f"Total Response Time: {end_time:.2f} seconds")
 
