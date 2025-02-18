@@ -117,10 +117,15 @@ try:
         partial_response_time = part_time - start_time
         end_time = prev_time - start_time
 
-        time.sleep(5)
+        time.sleep(2)
         # Capture the full response after thumbs up appears
         key_elements = driver.find_elements(By.CSS_SELECTOR, '[data-testid="MessageGroupNewBot"]')
-        full_response = " ".join([key.text for key in key_elements])
+
+        if key_elements:
+            full_response = key_elements[-1].text  # Get only the last message
+        else:
+            full_response = ""  # Handle cases where no messages are found
+
 
         # Append the data to the list
         data.append({
