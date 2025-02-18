@@ -41,6 +41,8 @@ try:
         EC.presence_of_element_located((By.ID, "expandable-input-chat-input"))
     )
 
+    time.sleep(5)
+
     # Loop through each question in the CSV
     for _, row in questions_df.iterrows():
         question = row["Question"]

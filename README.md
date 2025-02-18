@@ -44,4 +44,11 @@ responses (better data)
 test 1: "What are the dimensions of the Fire Max 11 tablet?" -> "Is the Kindle Oasis currently in stock?"
 test 2: "How much does the Ring Video Doorbell Pro 2 cost?" -> "Does Amazon allow order cancellations before shipping?"
 
-test 3: "The engraving on my Kindle Paperwhite is incorrect—how can I fix it?" -> ""
+test 3: "The engraving on my Kindle Paperwhite is incorrect—how can I fix it?" -> end
+
+## Fi Bot
+
+Mixed bag, but most important takeaway is that all questions ran in only 2 tests. This indicates the strong resistance to repeated query fatigue, unlike other bots here.
+
+test 1: gps_qs start -> ""
+test 2: gps_qs "" -> end
