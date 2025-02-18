@@ -89,17 +89,47 @@ print("\nComparison results saved to 'chatbot_helpfuness_comparison.csv'")
 
 ### Visualization code below ###
 
-# Create bar plots for each metric
-metrics = ['Average Helpfulness Score', 'Variation Penalty (Lower Similarity is Better)', 
-           'Redirect Frequency', 'Misunderstanding Frequency']
+# Load the saved chatbot performance comparison CSV
+comparison_df = pd.read_csv("chatbot_helpfulness_comparison.csv", index_col=0)
 
-# Generate bar charts for each metric
-for metric in metrics:
-    plt.figure(figsize=(8, 5))
-    plt.bar(comparison_df.index, comparison_df[metric], color=['blue', 'orange'])
-    plt.xlabel('Chatbot')
-    plt.ylabel(metric)
-    plt.title(f'Comparison of {metric}')
-    plt.ylim(0, 1)  # Values are normalized between 0 and 1
-    plt.grid(axis='y', linestyle='--', alpha=0.7)
-    plt.show()
+# Define metrics
+helpfulness_metric = 'Average Helpfulness Score'
+other_metrics = ['Variation Penalty (Lower Similarity is Better)', 'Redirect Frequency', 'Misunderstanding Frequency']
+
+### **Bar Graph for Helpfulness Score Only**
+fig, ax = plt.subplots(figsize=(8, 5))
+bars = ax.bar(comparison_df.index, comparison_df[helpfulness_metric], color='blue', edgecolor='black')
+
+# Add text labels on top of the bars for Helpfulness Score
+for bar in bars:
+    height = bar.get_height()
+    ax.text(bar.get_x() + bar.get_width()/2, height, f'{height:.2f}', 
+            ha='center', va='bottom', fontsize=12, fontweight='bold', color='black')
+
+# Labeling for Helpfulness Score
+ax.set_xlabel('Chatbots')
+ax.set_ylabel('Helpfulness Score (0-1)')
+ax.set_title('Chatbot Helpfulness Score Comparison')
+ax.set_ylim(0, 1)  # Ensure consistency in scaling
+
+plt.show()
+
+### **Grouped Bar Graph for Other Metrics**
+x = np.arange(len(comparison_df.index))  # the label locations
+width = 0.2  # the width of the bars
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Plot each metric as a set of bars
+for i, metric in enumerate(other_metrics):
+    ax.bar(x + i * width, comparison_df[metric], width, label=metric, edgecolor='black')
+
+# Labeling
+ax.set_xlabel('Chatbots')
+ax.set_ylabel('Score (Normalized 0-1)')
+ax.set_title('Chatbot Performance Comparison Across Metrics')
+ax.set_xticks(x + width * (len(other_metrics) / 2 - 0.5))
+ax.set_xticklabels(comparison_df.index)
+ax.legend()
+
+plt.show()
