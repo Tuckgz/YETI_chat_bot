@@ -32,7 +32,7 @@ data = []
 
 try:
     # Load the questions from the CSV
-    questions_df = pd.read_csv('rufus_questions.csv')
+    questions_df = pd.read_csv('rufus_extra_questions.csv')
     
     # Navigate to Amazon's homepage
     driver.get("https://www.amazon.com")
@@ -62,26 +62,26 @@ try:
         chat_input.send_keys(question)
         chat_input.send_keys(Keys.RETURN)
         
-        # Start timing the partial response (for the first element)
+        # Start timing and track response growth
         start_time = time.time()
+        initial_response_count = len(driver.find_elements(By.CSS_SELECTOR, "div.rufus-conversation span"))
 
-        # Wait for the first element (partial response) to appear
-        WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "div.rufus-conversation span key"))
-        )
+        while True:
+            key_elements = driver.find_elements(By.CSS_SELECTOR, "div.rufus-conversation span")
+            if len(key_elements) > initial_response_count:
+                partial_response_time = time.time() - start_time
+                partial_index = len(key_elements)
+                break
 
-        # Measure the partial response time (time for the first element to appear)
-        partial_response_time = time.time() - start_time
-
-        # Now, wait for the thumbs up image to appear (final response indicator)
+        # Wait for the thumbs-up image to appear (final response indicator)
         WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.ID, "rufus-thumbs-up"))
         )
         end_time = time.time() - start_time
 
-        # Capture the full response after thumbs up appears
-        key_elements = driver.find_elements(By.CSS_SELECTOR, "div.rufus-conversation span key")
-        full_response = " ".join([key.text for key in key_elements])
+        # Capture responses from the first detected response until the last one
+        key_elements = driver.find_elements(By.CSS_SELECTOR, "div.rufus-conversation span")
+        full_response = " ".join([key.text for key in key_elements[partial_index - 1:]])
 
         # Append the data to the list
         data.append({
@@ -92,7 +92,7 @@ try:
         })
 
         # Print the results
-        print("Rufus Response:", full_response.strip())
+        print("Rufus Full Response:", full_response.strip())
         print(f"Partial Response Time (first element): {partial_response_time:.2f} seconds")
         print(f"Total Response Time: {end_time:.2f} seconds")
 
