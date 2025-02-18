@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import re
@@ -85,3 +86,20 @@ print("\nComparison results saved to 'chatbot_helpfuness_comparison.csv'")
 
 # print("\nRufus responses containing possible redirects (link):")
 # print(rufus_df[rufus_df['full_response'].str.contains('link', case=False, na=False)])
+
+### Visualization code below ###
+
+# Create bar plots for each metric
+metrics = ['Average Helpfulness Score', 'Variation Penalty (Lower Similarity is Better)', 
+           'Redirect Frequency', 'Misunderstanding Frequency']
+
+# Generate bar charts for each metric
+for metric in metrics:
+    plt.figure(figsize=(8, 5))
+    plt.bar(comparison_df.index, comparison_df[metric], color=['blue', 'orange'])
+    plt.xlabel('Chatbot')
+    plt.ylabel(metric)
+    plt.title(f'Comparison of {metric}')
+    plt.ylim(0, 1)  # Values are normalized between 0 and 1
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
