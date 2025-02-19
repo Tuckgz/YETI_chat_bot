@@ -1,0 +1,31 @@
+Chatbot 1,Chatbot 2,Category,Cosine Similarity
+Yeti,Rufus,Product Information,0.68004286
+Yeti,Rufus,Pricing & Availability,0.87594616
+Yeti,Rufus,Comparisons,0.769101
+Yeti,Rufus,Warranties & Returns,0.9266877
+Yeti,Rufus,Care & Maintenance,0.7385353
+Yeti,Rufus,Multi-step Inquiries,0.6153132
+Yeti,Rufus,Follow-ups,0.77685595
+Yeti,Rufus,Order Status,0.9709307
+Yeti,Rufus,Escalation & Handoff,0.88174415
+Yeti,Rufus,Error Handling,0.5065283
+Yeti,Fi,Product Information,0.6983266
+Yeti,Fi,Pricing & Availability,0.91622144
+Yeti,Fi,Comparisons,0.7800839
+Yeti,Fi,Warranties & Returns,0.9548352
+Yeti,Fi,Care & Maintenance,0.82842636
+Yeti,Fi,Multi-step Inquiries,0.6204491
+Yeti,Fi,Follow-ups,0.533546
+Yeti,Fi,Order Status,0.9732636
+Yeti,Fi,Escalation & Handoff,0.7484811
+Yeti,Fi,Error Handling,0.6370405
+Rufus,Fi,Product Information,0.6869475
+Rufus,Fi,Pricing & Availability,0.8566344
+Rufus,Fi,Comparisons,0.762195
+Rufus,Fi,Warranties & Returns,0.890883
+Rufus,Fi,Care & Maintenance,0.70770746
+Rufus,Fi,Multi-step Inquiries,0.64039576
+Rufus,Fi,Follow-ups,0.5683768
+Rufus,Fi,Order Status,0.9438179
+Rufus,Fi,Escalation & Handoff,0.7000911
+Rufus,Fi,Error Handling,0.53714764
