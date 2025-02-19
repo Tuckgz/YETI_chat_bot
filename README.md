@@ -51,4 +51,4 @@ test 3: "The engraving on my Kindle Paperwhite is incorrect—how can I fix it?"
 Mixed bag, but most important takeaway is that all questions ran in only 2 tests. This indicates the strong resistance to repeated query fatigue, unlike other bots here.
 
 test 1: gps_qs start -> ""
-test 2: gps_qs "" -> end
+test 2: gps_qs "You said the Fi Collar can be tracked in real-time—how often does it update?" -> end
