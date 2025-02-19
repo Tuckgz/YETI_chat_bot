@@ -17,6 +17,9 @@ name_mapping = {"yeti": "Yeti", "rufus": "Rufus", "fi": "Fi"}
 # Create a persistent figure for the combined best-fit plot (BUT DON'T SHOW IT YET)
 fig_combined, ax_combined = plt.subplots(figsize=(8, 6))
 
+# Store the data for each chatbot to avoid overlapping in the combined plot
+chatbot_data = {}
+
 # Iterate over each chatbot
 for label, color in colors.items():
     subset = df[df["chat_bot"] == label].dropna(subset=["query_num", "partial_response_time", "total_response_time"])
@@ -63,14 +66,24 @@ for label, color in colors.items():
     ax_individual.legend()
     ax_individual.grid(True)
 
-    # --- Add best-fit lines with filled area to the combined plot ---
-    ax_combined.plot(x_range, y_partial, color=color, linestyle="--", label=f"{name_mapping[label]} - Partial")
-    ax_combined.fill_between(x_range, y_partial, alpha=0.3, color=color)
+    # Store data for the combined plot
+    chatbot_data[label] = (x_range, y_partial, color)
+
+# Plot the areas for all chatbots except Rufus (to avoid covering Rufus)
+for label, (x_range, y_partial, color) in chatbot_data.items():
+    if label != "rufus":  # Plot others first
+        ax_combined.plot(x_range, y_partial, color=color, linestyle="--", label=f"{name_mapping[label]} - Partial")
+        ax_combined.fill_between(x_range, y_partial, alpha=0.7, color=color)
+
+# Plot Rufus last to bring it to the front with full opacity
+x_range, y_partial, color = chatbot_data["rufus"]
+ax_combined.plot(x_range, y_partial, color=color, linestyle="--", label="Rufus - Partial")
+ax_combined.fill_between(x_range, y_partial, alpha=0.5, color=color)
 
 # --- Only now show the combined best-fit plot ---
 ax_combined.set_xlabel("Query Number")
 ax_combined.set_ylabel("Response Time (s)")
-ax_combined.set_title("Comparison of Partial Response Time Trends")
+ax_combined.set_title("Comparison of Initial Response Times")
 ax_combined.set_xlim(0, 40)
 ax_combined.set_ylim(0, 40)
 ax_combined.legend()
