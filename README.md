@@ -52,3 +52,12 @@ Mixed bag, but most important takeaway is that all questions ran in only 2 tests
 
 test 1: gps_qs start -> ""
 test 2: gps_qs "You said the Fi Collar can be tracked in real-time—how often does it update?" -> end
+
+
+# Uncertainty Transformer Model
+
+The transformer model used in this code is **facebook/bart-large-mnli**, which is a pre-trained model based on the BART architecture designed for natural language understanding tasks. It uses a sequence-to-sequence approach to predict the most likely labels for a given input, leveraging large-scale pretraining on text data. In this case, the model classifies responses as "certain," "uncertain," or "evasive" by evaluating the relationship between the response and the candidate labels. It then calculates a score for each label, selecting the one with the highest confidence. The model is effective at detecting uncertainty or evasiveness due to its ability to understand context and nuances in language.
+
+# Yes-or-no Data
+
+The yes_no code analyzes chatbot responses to determine how many questions and answers are "yes/no" type. It checks if a question begins with a modal verb (like "can," "is," or "should") to classify it as a yes/no question. Then, it evaluates the response to see if it starts with "yes" or "no." The results are counted and written to an output CSV file, showing the total number of yes/no questions and responses. The file also includes the chatbot's name for tracking.
