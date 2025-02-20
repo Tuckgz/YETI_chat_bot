@@ -1,3 +1,3 @@
-,Average Helpfulness Score,Variation Penalty (Lower Similarity is Better),Redirect Frequency,Misunderstanding Frequency
-Yeti,0.8114312063799051,0.6232056065404319,0.04950495049504951,0.019801980198019802
-Rufus,0.17366024908620528,0.1629661119528208,1.0,0.0
+,Average Helpfulness Score,Variation Penalty (Lower Similarity is Better),Redirect Frequency,Misunderstanding Frequency,Response Time Penalty,Average Sentiment Score
+Yeti,0.6126559620141356,0.6232056065404319,0.04950495049504951,0.07920792079207921,0.0,0.24620204858952255
+Rufus,0.6100339848978831,0.7381808028171669,0.08,0.09,0.0,0.20274042660947664
