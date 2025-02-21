@@ -32,13 +32,13 @@ data = []
 
 try:
     # Load the questions from the CSV
-    questions_df = pd.read_csv('rufus_extra_questions.csv')
+    questions_df = pd.read_csv('general_chatbot_questions.csv')
     
     # Navigate to Amazon's homepage
     driver.get("https://www.amazon.com")
     
     # Load cookies from file
-    load_cookies(driver, "amazon_cookies.pkl")
+    load_cookies(driver, "rufus/amazon_cookies.pkl")
     
     # Reload the page after adding cookies
     driver.refresh()
@@ -74,9 +74,12 @@ try:
                 break
 
         # Wait for the thumbs-up image to appear (final response indicator)
-        WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.ID, "rufus-thumbs-up"))
-        )
+        try:
+            WebDriverWait(driver, 30).until(
+                EC.presence_of_element_located((By.ID, "rufus-thumbs-up"))
+            )
+        except Exception as e:
+            continue
         end_time = time.time() - start_time
 
         # Capture responses from the first detected response until the last one
@@ -107,11 +110,11 @@ finally:
     df = pd.DataFrame(data)
 
     # Check if the CSV file exists
-    if append_to_csv and os.path.exists("rufus_responses.csv"):
+    if append_to_csv and os.path.exists("rufus_general_responses.csv"):
         # Append the data to the existing CSV
-        df.to_csv("rufus_responses.csv", mode='a', header=False, index=False)
-        print("Data appended to rufus_responses.csv")
+        df.to_csv("rufus_general_responses.csv", mode='a', header=False, index=False)
+        print("Data appended to rufus_general_responses.csv")
     else:
         # Overwrite the existing CSV or create a new one
-        df.to_csv("rufus_responses.csv", index=False)
-        print("Data saved to rufus_responses.csv")
+        df.to_csv("rufus_general_responses.csv", index=False)
+        print("Data saved to rufus_general_responses.csv")

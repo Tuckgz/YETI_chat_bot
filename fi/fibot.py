@@ -21,7 +21,7 @@ data = []
 
 try:
     # Load the questions from the CSV
-    questions_df = pd.read_csv("fi_gps_questions.csv")
+    questions_df = pd.read_csv("general_chatbot_questions.csv")
     
     # Navigate to the website
     driver.get("https://tryfi.com/")
@@ -95,5 +95,5 @@ finally:
         df.to_csv("fi_responses.csv", mode="a", header=False, index=False)
         print("Data appended to fi_responses.csv")
     else:
-        df.to_csv("fi_responses.csv", index=False)
+        df.to_csv("fi/fi_general_responses.csv", index=False)
         print("Data saved to fi_responses.csv")

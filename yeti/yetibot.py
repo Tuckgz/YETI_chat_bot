@@ -37,13 +37,13 @@ data = []
 
 try:
     # Load the questions from the CSV
-    questions_df = pd.read_csv('yeti_questions.csv')
+    questions_df = pd.read_csv('general_chatbot_questions.csv')
     
     # Navigate to Amazon's homepage
     driver.get("https://www.yeti.com")
     
     # Load cookies from file
-    load_cookies(driver, "yeti_cookies.pkl")
+    load_cookies(driver, "yeti/yeti_cookies.pkl")
     
     # Reload the page after adding cookies
     driver.refresh()
@@ -151,11 +151,11 @@ finally:
     df = pd.DataFrame(data)
 
     # Check if the CSV file exists
-    if append_to_csv and os.path.exists("yeti_responses.csv"):
+    if append_to_csv and os.path.exists("yeti/yeti_general_responses.csv"):
         # Append the data to the existing CSV
-        df.to_csv("yeti_responses.csv", mode='a', header=False, index=False)
-        print("Data appended to yeti_responses.csv")
+        df.to_csv("yeti/yeti_general_responses.csv", mode='a', header=False, index=False)
+        print("Data appended to yeti_general_responses.csv")
     else:
         # Overwrite the existing CSV or create a new one
-        df.to_csv("yeti_responses.csv", index=False)
-        print("Data saved to yeti_responses.csv")
+        df.to_csv("yeti/yeti_general_responses.csv", index=False)
+        print("Data saved to yeti_general_responses.csv")
