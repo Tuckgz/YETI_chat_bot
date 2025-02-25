@@ -4,12 +4,14 @@ import numpy as np
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 # Updated file paths
-file1 = 'yeti/yeti_responses.csv'
-file2 = 'yeti/yeti_general_responses.csv'
-file3 = 'rufus/rufus_responses.csv'
-file4 = 'rufus/rufus_general_responses.csv'
-file5 = 'fi/fi_responses.csv'
-file6 = 'fi/fi_general_responses.csv'
+file_paths = {
+    "YETI Specific": 'yeti/yeti_responses.csv',
+    "YETI General": 'yeti/yeti_general_responses.csv',
+    "Rufus Specific": 'rufus/rufus_responses.csv',
+    "Rufus General": 'rufus/rufus_general_responses.csv',
+    "Fi Specific": 'fi/fi_responses.csv',
+    "Fi General": 'fi/fi_general_responses.csv'
+}
 
 # Initialize VADER Sentiment Analyzer
 analyzer = SentimentIntensityAnalyzer()
@@ -32,36 +34,37 @@ def analyze_sentiment_intensity(df, file_path):
     df['Emotion Intensity'] = emotion_scores
     return df
 
-# Plot emotion intensity distribution
-def plot_emotion_intensity(df, title):
-    intensity_bins = {
-        "0.0-0.2": len(df[(df['Emotion Intensity'] >= 0.0) & (df['Emotion Intensity'] < 0.2)]),
-        "0.2-0.4": len(df[(df['Emotion Intensity'] >= 0.2) & (df['Emotion Intensity'] < 0.4)]),
-        "0.4-0.6": len(df[(df['Emotion Intensity'] >= 0.4) & (df['Emotion Intensity'] < 0.6)]),
-        "0.6-0.8": len(df[(df['Emotion Intensity'] >= 0.6) & (df['Emotion Intensity'] < 0.8)]),
-        "0.8-1.0": len(df[(df['Emotion Intensity'] >= 0.8) & (df['Emotion Intensity'] <= 1.0)])
-    }
-    
-    labels = list(intensity_bins.keys())
-    values = list(intensity_bins.values())
-    
-    # Bar Chart
-    plt.figure(figsize=(8, 5))
-    plt.bar(labels, [v / len(df) * 100 for v in values])
-    plt.xlabel('Emotion Intensity Range')
-    plt.ylabel('Percentage of Responses')
-    plt.title(f'Emotion Intensity Distribution - {title}')
-    plt.show()
+# Dictionary to store average intensity values
+company_averages = {}
 
-# Process multiple CSVs
-for file_path in [file1, file2, file3, file4, file5, file6]:
+# Process multiple CSVs and calculate averages
+for name, file_path in file_paths.items():
     df = load_data(file_path)
     df = analyze_sentiment_intensity(df, file_path)
     
     # Save the results to a CSV file
     output_file = f'sentiment_intensity_{file_path.replace("/", "_")}'
     df.to_csv(output_file, index=False)
-    print(f'Results saved to {output_file}')
     
-    # Plot results
-    plot_emotion_intensity(df, "Yeti Specific" if "yeti_responses.csv" in file_path else "Yeti General" if "yeti_general_responses.csv" in file_path else "Rufus Specific" if "rufus_responses.csv" in file_path else "Rufus General" if "rufus_general_responses.csv" in file_path else "Fi Specific" if "fi_responses.csv" in file_path else "Fi General")
+    # Extract company name (e.g., "Yeti", "Rufus", "Fi")
+    company_name = name.split()[0]
+    
+    # Store average intensity for this dataset
+    avg_intensity = df['Emotion Intensity'].mean()
+    
+    # Add to combined averages
+    if company_name not in company_averages:
+        company_averages[company_name] = []
+    company_averages[company_name].append(avg_intensity)
+
+# Compute final company averages
+final_averages = {company: np.mean(intensities) for company, intensities in company_averages.items()}
+
+# Plot the company-wide average emotion intensities
+plt.figure(figsize=(8, 5))
+plt.bar(final_averages.keys(), final_averages.values(), color=['blue', 'orange', 'green'])
+plt.xlabel('Company')
+plt.ylabel('Average Emotion Intensity')
+plt.title('Combined Emotion Intensity Averages per Company')
+plt.ylim(0, 1)  # Emotion intensity is between 0 and 1
+plt.show()
