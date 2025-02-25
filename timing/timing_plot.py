@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Read the processed CSV file
-df = pd.read_csv("timing_data.csv")
+df = pd.read_csv("timing/general_timing_data.csv")
 
 # Convert chat_bot column to lowercase for consistent matching
 df["chat_bot"] = df["chat_bot"].str.lower()
@@ -83,7 +83,7 @@ ax_combined.fill_between(x_range, y_partial, alpha=0.5, color=color)
 # --- Only now show the combined best-fit plot ---
 ax_combined.set_xlabel("Query Number")
 ax_combined.set_ylabel("Response Time (s)")
-ax_combined.set_title("Comparison of Initial Response Times")
+ax_combined.set_title("Comparison of Initial Response Times\nGeneral")
 ax_combined.set_xlim(0, 40)
 ax_combined.set_ylim(0, 40)
 ax_combined.legend()

@@ -1,0 +1,34 @@
+# Netscape HTTP Cookie File
+# https://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file! Do not edit.
+
+www.yeti.com	FALSE	/	TRUE	1754939496	dwanonymous_239dcfc1b6ddfc817cfcf1ac43d9edb0	abQZCa7CBU32zOyMAXhUDGq6n9
+www.yeti.com	FALSE	/	FALSE	1771302391	_pxhd	0hU-27hYK0wZ93q5Z9PStQ7A6cHPp7XAwUw/wObumUjqqm1bKBy4FwdV2t-UTYouotBr6YB7At-DxnU/h5nw3A==:dS/WKmV7f-6GGer61G/wFykaTkFasWPNx0QrQS9TISvdPw9Kt6wMpGy3A7J1Q-uZIJT5N8SxlNY9bvE2870ShOmquZuPx5pSU3tKUX0pRlU=
+.yeti.com	TRUE	/	FALSE	1747542391	OptanonConsent	isGpcEnabled=1&datestamp=Sun+Feb+16+2025+23%3A26%3A31+GMT-0500+(Eastern+Standard+Time)&version=202501.1.0&browserGpcFlag=1&isIABGlobal=false&hosts=&consentId=c37fe681-35f0-4934-ac4b-e01b84916805&interactionCount=1&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A0&intType=3&geolocation=US%3BNC&AwaitingReconsent=false
+www.yeti.com	FALSE	/	FALSE	1774326391	peerius_user	cuid:15267245852|99y_tnM67ERsqj6tUCtg2snV9rRub6aJaUYy4V-w_Qc
+.yeti.com	TRUE	/	FALSE	1755318391	optimizelyEndUserId	oeu1739387501561r0.31551553003626676
+.yeti.com	TRUE	/	FALSE	1755318391	optimizelySession	0
+www.yeti.com	FALSE	/	TRUE	1770923522	hideSiteEntryModal	true
+.yeti.com	TRUE	/	FALSE	1747163561	OptanonAlertBoxClosed	2025-02-12T19:12:41.881Z
+.yeti.com	TRUE	/	FALSE	1770923767	_pxvid	c0805127-e975-11ef-b156-44966777e6e6
+.yeti.com	TRUE	/	FALSE	1739766721	_px2	eyJ1IjoiNWM3MjI2NDAtZWNlNy0xMWVmLTllODktZmI3MzgyYjZmZmQyIiwidiI6ImMwODA1MTI3LWU5NzUtMTFlZi1iMTU2LTQ0OTY2Nzc3ZTZlNiIsInQiOjE3Mzk3NjY2OTE1NjEsImgiOiIwODY0MGI0MmY3NDliOTcwNzc3NWU1ZGZkMDAwMGUwYTY2YzFhMjg4YWRlODNhOTBmY2Q0NjVmMWNiMjZkYmViIn0=
+.yeti.com	TRUE	/	FALSE	1771302392	ajs_anonymous_id	ad2e9e3a-747a-4a85-b455-80cb7de4aea3
+.yeti.com	TRUE	/	TRUE	1774326392	_ga_T0453GY6LK	GS1.1.1739766392.2.1.1739766392.0.0.1638790574
+.yeti.com	TRUE	/	FALSE	1774326392	_ga	GA1.1.2015660671.1739387769
+.yeti.com	TRUE	/	FALSE	1773551769	_cs_c	0
+.yeti.com	TRUE	/	FALSE	1773551769	_cs_id	e888ba4e-f107-af42-90d2-f3a2cf02182d.1739387769.2.1739766393.1739766393.1.1773551769673.1
+.yeti.com	TRUE	/	TRUE	1770924116	BVBRANDID	f254eac0-7e37-48cc-9ca0-e02e067bd1d9
+.yeti.com	TRUE	/	FALSE	1770946162	_shopify_y	8C0C0FB9-1670-4496-83ad-3ecfe851a7bf
+.yeti.com	TRUE	/	FALSE	1770924563	_tracking_consent	%7B%22con%22%3A%7B%22CMP%22%3A%7B%22a%22%3A%221%22%2C%22m%22%3A%221%22%2C%22p%22%3A%221%22%2C%22s%22%3A%220%22%7D%7D%2C%22v%22%3A%222.1%22%2C%22region%22%3A%22USNC%22%2C%22reg%22%3A%22%22%2C%22purposes%22%3A%7B%22a%22%3Atrue%2C%22p%22%3Atrue%2C%22m%22%3Atrue%2C%22t%22%3Afalse%7D%2C%22display_banner%22%3Afalse%2C%22sale_of_data_region%22%3Afalse%2C%22consent_id%22%3A%221E3A61BC-b80d-4490-901f-2f1f45e134d7%22%7D
+.yeti.com	TRUE	/	FALSE	1740598160	_orig_referrer	https%3A%2F%2Fchatgpt.com%2F
+.yeti.com	TRUE	/	FALSE	1740598160	_landing_page	%2Fproducts%2Frambler-12-bottle-with-hotshot-cap-stainless-steel
+www.yeti.com	FALSE	/	TRUE	0	sid	LoRmyawXnqylLzcjS01hVY3LXG3Yt5qzteg
+www.yeti.com	FALSE	/	TRUE	0	__cq_dnt	1
+www.yeti.com	FALSE	/	TRUE	0	dw_dnt	1
+www.yeti.com	FALSE	/	TRUE	0	dwsid	H8PxDGJIGZNYVR6QBt2DCLyMy6gW6B2MSJINo-7S1kcd_wL5W4OvmRIsU-RfqRt-cUY9_wcbagjbPEkS2z5x3A==
+.yeti.com	TRUE	/	FALSE	0	pxcts	cfdc11dc-e975-11ef-b82f-f45113f6dbac
+www.yeti.com	FALSE	/	FALSE	1739766390	peerius_rid	-1
+www.yeti.com	FALSE	/	FALSE	1739766391	peerius_ct	t
+.yeti.com	TRUE	/	TRUE	1739768190	BVBRANDSID	8ff6c70f-7097-4e4f-85a3-854c5be6f197
+www.yeti.com	FALSE	/	FALSE	1739780791	peerius_sess	21674015902|M-SM-MX744GHP0lABFN48mihwTwjV_sJW4dymw_ZGQ4
+.yeti.com	TRUE	/	FALSE	1739768193	_cs_s	1.5.0.9.1739768193976

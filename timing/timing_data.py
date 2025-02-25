@@ -2,9 +2,9 @@ import pandas as pd
 
 # Define the files and their labels
 csv_files = {
-    "yeti_responses.csv": "yeti",
-    "rufus_responses.csv": "rufus",
-    "fi_responses.csv": "fi"
+    "yeti/yeti_general_responses.csv": "yeti",
+    "rufus/rufus_general_responses.csv": "rufus",
+    "fi/fi_general_responses.csv": "fi"
 }
 
 # Define reset conditions (values in the first column that indicate a new batch)
@@ -49,5 +49,5 @@ for file, label in csv_files.items():
 combined_df = pd.concat(all_data, ignore_index=True)
 
 # Save to a new CSV file
-combined_df.to_csv("timing_data.csv", index=False)
-print("Saved timing data to timing_data.csv")
+combined_df.to_csv("general_timing_data.csv", index=False)
+print("Saved timing data to general_timing_data.csv")

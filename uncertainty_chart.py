@@ -43,7 +43,7 @@ def create_donut_chart(total_uncertain, total_responses, colors):
     )
 
     # Add a title with a modern font
-    ax.set_title(f"Uncertainty in Fi Responses", fontsize=18, fontweight='bold', pad=20)
+    ax.set_title(f"Uncertainty in Yeti Responses\n(General)", fontsize=18, fontweight='bold', pad=20)
 
     # Add a legend without labels on the chart
     ax.legend(wedges, labels, title="Categories", loc="upper right", bbox_to_anchor=(1, 0, 0.5, 1), fontsize=12)
@@ -53,7 +53,7 @@ def create_donut_chart(total_uncertain, total_responses, colors):
     plt.show()
 
 # Read the CSV file (replace 'responses.csv' with your file)
-df = pd.read_csv('fi/fi_responses.csv')
+df = pd.read_csv('yeti/yeti_general_responses.csv')
 
 # Assuming the second column contains the responses (replace 'column_name' with the actual name of the column)
 df['uncertainty_category'] = df.iloc[:, 1].apply(classify_uncertainty)  # Explicitly referencing the second column
@@ -62,10 +62,10 @@ df['uncertainty_category'] = df.iloc[:, 1].apply(classify_uncertainty)  # Explic
 category_counts = df['uncertainty_category'].value_counts()
 
 # Define a cohesive, modern color palette
-colors_list = ['#AED6F1', '#2E86C1']  # Blue tones
+# colors_list = ['#AED6F1', '#2E86C1']  # Blue tones
 # Uncomment and modify these for different color schemes
-#colors_list = ['#ABEBC6', '#58D68D']  # Green tones
-# colors_list = ['#FDEBD0', '#F4D03F']  # Gold tones
+# colors_list = ['#ABEBC6', '#58D68D']  # Green tones
+colors_list = ['#FDEBD0', '#F4D03F']  # Gold tones
 
 # Create donut chart with counts of uncertain responses
 create_donut_chart(category_counts.get("uncertain/evasive", 0), len(df), colors_list)
